@@ -1,0 +1,10 @@
+Cmp-Mod V01 Created by CvPcb (2013-05-16 BZR 4016)-stable date = 31.05.2013 19:54:46
+
+BeginCmp
+TimeStamp = /51A8E085;
+Reference = IC1;
+ValeurCmp = L298;
+IdModule  = stepper drivers-MW-15;
+EndCmp
+
+EndListe
