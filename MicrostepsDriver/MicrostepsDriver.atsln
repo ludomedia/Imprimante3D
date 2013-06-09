@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "MicrostepsDriver", "MicrostepsDriver\MicrostepsDriver.cproj", "{FA9AFC80-B93E-414A-B5A8-CB1A37D89594}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA9AFC80-B93E-414A-B5A8-CB1A37D89594}.Debug|AVR.ActiveCfg = Debug|AVR
+		{FA9AFC80-B93E-414A-B5A8-CB1A37D89594}.Debug|AVR.Build.0 = Debug|AVR
+		{FA9AFC80-B93E-414A-B5A8-CB1A37D89594}.Release|AVR.ActiveCfg = Release|AVR
+		{FA9AFC80-B93E-414A-B5A8-CB1A37D89594}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
