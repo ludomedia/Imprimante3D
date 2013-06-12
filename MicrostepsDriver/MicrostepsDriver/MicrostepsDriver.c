@@ -35,43 +35,70 @@ const uint8_t sinewave[] PROGMEM = {
 	79, 82, 85, 88, 91, 94, 97,100,103,106,109,112,116,119,122,125
 };
 
+#define COIL_B_DIR DDRB
+#define COIL_A_PORT PORTB
+#define COIL_A_PIN_1 PB0
+#define COIL_A_PIN_2 PB1
+
+#define COIL_A_DIR DDRA
+#define COIL_B_PORT PORTA
+#define COIL_B_PIN_1 PA3
+#define COIL_B_PIN_2 PA2
+
+#define DIRECTION_PORT PORTA
+#define DIRECTION_PIN PA6
+
 #define STOP 0
 #define UP 1
 #define DOWN 2
 
-unsigned char dir = UP;
 unsigned char step_inc = 32;
 unsigned char microstep = 0;
 unsigned char divisor = 0;
 
+volatile signed char steps = 0;
+
 ISR(TIM0_OVF_vect)
 {
-	PORTA ^= (1<<PA0);
+	//PORTA ^= (1<<PA0);
 
 	divisor++;
 	divisor = divisor & 0x03;
 	if(divisor==0) {
-		if(dir==UP) microstep += step_inc;
-		else if(dir==DOWN) microstep -= step_inc;
-
+		if(steps>0) {
+			microstep += step_inc;
+			steps--;
+		}			
+		else if(steps<0) {
+			microstep -= step_inc;
+			steps++;
+		}
 		unsigned char i = microstep;
 		OCR0A = pgm_read_byte_near(sinewave + i);
 		i += 0x40;
 		OCR0B = pgm_read_byte_near(sinewave + i);
-
 	}
-	PORTA &= ~((1<<PA4)|(1<<PA2));
-	PORTA |= (1<<PA5)|(1<<PA3);
+	COIL_A_PORT &= ~(1<<COIL_A_PIN_1);
+	COIL_A_PORT |= (1<<COIL_A_PIN_2);
+	COIL_B_PORT &= ~(1<<COIL_B_PIN_1);
+	COIL_B_PORT |= (1<<COIL_B_PIN_2);
+	
+	//PORTA &= ~((1<<PA4)|(1<<PA2));
+	//PORTA |= (1<<PA5)|(1<<PA3);
 }
 
 ISR(TIM0_COMPA_vect) {
-	PORTA &= ~(1<<PA5);
-	PORTA |= (1<<PA4);
+	COIL_A_PORT |= (1<<COIL_A_PIN_1);
+	COIL_A_PORT &= ~(1<<COIL_A_PIN_2);	
+	//PORTA &= ~(1<<PA5);
+	//PORTA |= (1<<PA4);
 }
 
 ISR(TIM0_COMPB_vect) {
-	PORTA &= ~(1<<PA3);
-	PORTA |= (1<<PA2);	
+	COIL_B_PORT |= (1<<COIL_B_PIN_1);
+	COIL_B_PORT &= ~(1<<COIL_B_PIN_2);
+	//PORTA &= ~(1<<PA3);
+	//PORTA |= (1<<PA2);	
 }
 
 
@@ -82,45 +109,27 @@ int main(void)
 	OCR0B	=	0x60;		// PWM 2
 	//OCR0C	=	0xFF;
 	
-	DDRB = 0xFF; //(1<<DDB5)|(1<<DDB4)|(0<<DDB3)|(0<<DDB2)|(1<<DDB1)|(0<<DDB0);
-	DDRA = 0xFF; //(1<<DDB5)|(1<<DDB4)|(0<<DDB3)|(0<<DDB2)|(1<<DDB1)|(0<<DDB0);
+	//DDRB = 0xFF; //(1<<DDB5)|(1<<DDB4)|(0<<DDB3)|(0<<DDB2)|(1<<DDB1)|(0<<DDB0);
+	//DDRA = 0xFF; //(1<<DDB5)|(1<<DDB4)|(0<<DDB3)|(0<<DDB2)|(1<<DDB1)|(0<<DDB0);
+	COIL_A_DIR = (1<<COIL_A_PIN_1) | (1<<COIL_A_PIN_2);
+	COIL_B_DIR = (1<<COIL_B_PIN_1) | (1<<COIL_B_PIN_2);
 
+	DDRB &= ~(1<<PB2); // INT0 as entry
+	MCUCR |= (1<<ISC01)|(1<<ISC00); // rising edge on INT0
+			
 	TCCR0A = (1<<COM0A1)|(0<<COM0A0)|(1<<COM0B1)|(0<<COM0B0)|(1<<WGM01)|(1<<WGM00);			// Fast PWM Non inverting mode TOP = 0xFF
 	//TCCR0B = (0<<WGM02)|(0<<CS02)|(0<<CS01)|(1<<CS00);										// No prescaling
 	TCCR0B = (0<<WGM02)|(0<<CS02)|(1<<CS01)|(0<<CS00);										// 8 prescaling
 	TIMSK0 = (1<<TOIE0)|(1<<OCIE0A)|(1<<OCIE0B);											// Enable Timer 0 overflow interrupt
 	
-/*
-	TCCR1 = ((1<<PWM1A)|(1<<COM1A1));
-	GTCCR = (1<<PWM1B)|(1<<COM1B1);
-
-	// Activate PLL and wait for pll lock
-	PLLCSR = (1<<PLLE);
-	for(unsigned int j=0;j<1000;j++)asm("NOP");
-	while(!(PLLCSR&(1<<PLOCK)));
-	PLLCSR|=(1<<PCKE);
-*/
 	sei();
-	
-/*	_CONFIGURE_PWM1_CHANNEL();
-	_CONFIGURE_PWM2_CHANNEL();
-	_CONFIGURE_PWM_BASE_FREQ();
-	
-	_CONFIGURE_I_O_PINS();	
-	_SET_INTERNAL_PULLUPS();
-	
-	_ENABLE_PWM1_CHANNEL();
-	_ENABLE_PWM2_CHANNEL();
-	
-	_ENABLE_PLL();
-	_DELAY_1000_CYCLES();
-	_WAIT_TILL_PLL_LOCKED();
-	_ENABLE_PLL_CLOCK_SOURCE();
-	
-	_ENABLE_TIMER1_OVERFLOW_INTERRUPT;
-	_ENABLE_GLOBAL_INTERRUPTS();	
-	_SET_TIMER1_FREQUENCY(1);
-*/	
+
     while(1) {
+		if(GIFR & (1<<INTF0)) { // check if an interrupt request occured on INT0
+			GIFR |= (1<<INTF0); // write one to clear the flag
+			steps++;
+			//if(DIRECTION_PORT & DIRECTION_PIN) steps++;
+			//else steps--;
+		}
 	}
 }
