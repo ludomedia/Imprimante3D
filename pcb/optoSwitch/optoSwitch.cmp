@@ -1,0 +1,31 @@
+Cmp-Mod V01 Created by CvPcb (2013-05-16 BZR 4016)-stable date = 15.06.2013 18:52:42
+
+BeginCmp
+TimeStamp = /51BC8DD8;
+Reference = IC1;
+ValeurCmp = OPTOSWITCH;
+IdModule  = OptoSwitchMiniature;
+EndCmp
+
+BeginCmp
+TimeStamp = /51BC8E35;
+Reference = K1;
+ValeurCmp = CONN_3;
+IdModule  = SIL-3;
+EndCmp
+
+BeginCmp
+TimeStamp = /51BC8DED;
+Reference = R1;
+ValeurCmp = 220R;
+IdModule  = R3;
+EndCmp
+
+BeginCmp
+TimeStamp = /51BC8DFC;
+Reference = R2;
+ValeurCmp = 2k2;
+IdModule  = R3;
+EndCmp
+
+EndListe

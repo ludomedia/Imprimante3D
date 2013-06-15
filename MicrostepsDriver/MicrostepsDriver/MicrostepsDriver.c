@@ -45,7 +45,7 @@ const uint8_t sinewave[] PROGMEM = {
 #define COIL_B_PIN_1 PA3
 #define COIL_B_PIN_2 PA2
 
-#define DIRECTION_PORT PORTA
+#define DIRECTION_PORT PINA
 #define DIRECTION_PIN PA6
 
 #define STOP 0
@@ -127,9 +127,9 @@ int main(void)
     while(1) {
 		if(GIFR & (1<<INTF0)) { // check if an interrupt request occured on INT0
 			GIFR |= (1<<INTF0); // write one to clear the flag
-			steps++;
-			//if(DIRECTION_PORT & DIRECTION_PIN) steps++;
-			//else steps--;
+			//steps++;
+			if(DIRECTION_PORT & (1<<DIRECTION_PIN)) steps++;
+			else steps--;
 		}
 	}
 }
