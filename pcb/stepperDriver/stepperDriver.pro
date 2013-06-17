@@ -1,4 +1,4 @@
-update=09.06.2013 15:01:58
+update=17.06.2013 08:57:30
 version=1
 last_client=pcbnew
 [general]
@@ -69,7 +69,7 @@ BoardOutlineThickness=0.100000000000
 ModuleOutlineThickness=0.150000000000
 [pcbnew/libraries]
 LibDir=
-LibName1=marcha/Multiwatt15-O
+LibName1=C:/Users/marcha/Documents/GitHub/kicad-lib/marcha
 LibName2=sockets
 LibName3=connect
 LibName4=discret

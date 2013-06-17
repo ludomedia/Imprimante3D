@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2013-05-16 BZR 4016)-stable date = 09.06.2013 18:17:30
+Cmp-Mod V01 Created by CvPcb (2013-05-31 BZR 4019)-stable date = 17.06.2013 09:07:08
 
 BeginCmp
 TimeStamp = /51B47444;
@@ -32,56 +32,56 @@ BeginCmp
 TimeStamp = /51B47369;
 Reference = D1;
 ValeurCmp = DIODE;
-IdModule  = D5;
+IdModule  = D6;
 EndCmp
 
 BeginCmp
 TimeStamp = /51B47378;
 Reference = D2;
 ValeurCmp = DIODE;
-IdModule  = D5;
+IdModule  = D6;
 EndCmp
 
 BeginCmp
 TimeStamp = /51B47387;
 Reference = D3;
 ValeurCmp = DIODE;
-IdModule  = D5;
+IdModule  = D6;
 EndCmp
 
 BeginCmp
 TimeStamp = /51B47396;
 Reference = D4;
 ValeurCmp = DIODE;
-IdModule  = D5;
+IdModule  = D6;
 EndCmp
 
 BeginCmp
 TimeStamp = /51B473A5;
 Reference = D5;
 ValeurCmp = DIODE;
-IdModule  = D5;
+IdModule  = D6;
 EndCmp
 
 BeginCmp
 TimeStamp = /51B473B4;
 Reference = D6;
 ValeurCmp = DIODE;
-IdModule  = D5;
+IdModule  = D6;
 EndCmp
 
 BeginCmp
 TimeStamp = /51B473C3;
 Reference = D7;
 ValeurCmp = DIODE;
-IdModule  = D5;
+IdModule  = D6;
 EndCmp
 
 BeginCmp
 TimeStamp = /51B473D2;
 Reference = D8;
 ValeurCmp = DIODE;
-IdModule  = D5;
+IdModule  = D6;
 EndCmp
 
 BeginCmp
@@ -99,9 +99,9 @@ IdModule  = SIL-6;
 EndCmp
 
 BeginCmp
-TimeStamp = /51B479D1;
+TimeStamp = /51B48DDA;
 Reference = P2;
-ValeurCmp = CONN_6;
+ValeurCmp = CONN_7;
 IdModule  = SIL-7;
 EndCmp
 
