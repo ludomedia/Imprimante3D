@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date 15.06.2013 17:59:46
+EESchema Schematic File Version 2  date 27.06.2013 12:45:07
 LIBS:marcha
 LIBS:power
 LIBS:device
@@ -30,13 +30,14 @@ LIBS:opto
 LIBS:atmel
 LIBS:contrib
 LIBS:valves
+LIBS:optoSwitch-cache
 EELAYER 27 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title ""
-Date "15 jun 2013"
+Date "27 jun 2013"
 Rev ""
 Comp ""
 Comment1 ""
@@ -71,7 +72,7 @@ L R R2
 U 1 1 51BC8DFC
 P 4200 2400
 F 0 "R2" V 4280 2400 40  0000 C CNN
-F 1 "2k2" V 4207 2401 40  0000 C CNN
+F 1 "4k7" V 4207 2401 40  0000 C CNN
 F 2 "~" V 4130 2400 30  0000 C CNN
 F 3 "~" H 4200 2400 30  0000 C CNN
 	1    4200 2400

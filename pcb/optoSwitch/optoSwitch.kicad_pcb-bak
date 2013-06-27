@@ -3,7 +3,7 @@
   (general
     (links 7)
     (no_connects 0)
-    (area 44.45 24.13 68.58 36.83)
+    (area 45.669999 25.865445 67.360001 37.634555)
     (thickness 1.6)
     (drawings 4)
     (tracks 13)
@@ -58,7 +58,7 @@
     (pad_drill 0.6)
     (pad_to_mask_clearance 0)
     (aux_axis_origin 0 0)
-    (visible_elements FFFF7FBF)
+    (visible_elements FFFFFFBF)
     (pcbplotparams
       (layerselection 3178497)
       (usegerberextensions true)
@@ -207,13 +207,13 @@
     )
   )
 
-  (module OptoSwitchMiniature (layer Dessus.Cu) (tedit 51BC9E56) (tstamp 51BC92CD)
+  (module OptoSwitchMiniature (layer Dessus.Cu) (tedit 51BC9FFF) (tstamp 51BC92CD)
     (at 63.5 31.75 270)
     (path /51BC8DD8)
     (fp_text reference IC1 (at 0 0 270) (layer Dessus.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
     )
-    (fp_text value OPTOSWITCH (at 0 -3.81 270) (layer Dessus.SilkS)
+    (fp_text value OPTOSWITCH (at 0 2.54 270) (layer Dessus.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (fp_line (start 1.27 -0.635) (end 2.54 -0.635) (layer Dessus.SilkS) (width 0.15))

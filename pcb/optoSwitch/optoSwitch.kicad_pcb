@@ -32,7 +32,7 @@
   )
 
   (setup
-    (last_trace_width 0.5)
+    (last_trace_width 0.254)
     (user_trace_width 0.5)
     (trace_clearance 0.254)
     (zone_clearance 0.508)
@@ -58,7 +58,7 @@
     (pad_drill 0.6)
     (pad_to_mask_clearance 0)
     (aux_axis_origin 0 0)
-    (visible_elements FFFFFFBF)
+    (visible_elements 7FFFFFFF)
     (pcbplotparams
       (layerselection 3178497)
       (usegerberextensions true)
@@ -181,7 +181,7 @@
     (fp_text reference R2 (at 0 0.127 180) (layer Dessus.SilkS) hide
       (effects (font (size 1.397 1.27) (thickness 0.2032)))
     )
-    (fp_text value 2k2 (at 0 0.127 180) (layer Dessus.SilkS)
+    (fp_text value 4k7 (at 0 0.127 180) (layer Dessus.SilkS)
       (effects (font (size 1.397 1.27) (thickness 0.2032)))
     )
     (fp_line (start -3.81 0) (end -3.302 0) (layer Dessus.SilkS) (width 0.2032))
@@ -251,15 +251,15 @@
   (segment (start 55.88 31.75) (end 58.42 31.75) (width 0.5) (layer Dessous.Cu) (net 1) (tstamp 51BC9E30))
   (segment (start 53.34 29.21) (end 55.88 31.75) (width 0.5) (layer Dessous.Cu) (net 1) (tstamp 51BC9E2C))
   (segment (start 48.26 29.21) (end 50.8 29.21) (width 0.5) (layer Dessous.Cu) (net 1) (status 80000))
-  (segment (start 64.77 34.29) (end 64.77 29.21) (width 0.5) (layer Dessous.Cu) (net 2) (status C00000))
-  (segment (start 64.77 34.29) (end 64.77 35.56) (width 0.5) (layer Dessous.Cu) (net 2) (status 400000))
-  (segment (start 48.26 35.56) (end 48.26 34.29) (width 0.5) (layer Dessous.Cu) (net 2) (tstamp 51BC9E97) (status 800000))
+  (segment (start 64.77 34.29) (end 64.77 29.21) (width 0.5) (layer Dessous.Cu) (net 2))
+  (segment (start 64.77 34.29) (end 64.77 35.56) (width 0.5) (layer Dessous.Cu) (net 2))
+  (segment (start 48.26 35.56) (end 48.26 34.29) (width 0.5) (layer Dessous.Cu) (net 2) (tstamp 51BC9E97))
   (segment (start 64.77 35.56) (end 48.26 35.56) (width 0.5) (layer Dessous.Cu) (net 2) (tstamp 51BC9E96))
-  (segment (start 62.23 34.29) (end 54.61 34.29) (width 0.5) (layer Dessous.Cu) (net 3) (status 400000))
-  (segment (start 52.07 31.75) (end 50.8 31.75) (width 0.5) (layer Dessous.Cu) (net 3) (tstamp 51BC9E93) (status 800000))
+  (segment (start 62.23 34.29) (end 54.61 34.29) (width 0.5) (layer Dessous.Cu) (net 3))
+  (segment (start 52.07 31.75) (end 50.8 31.75) (width 0.5) (layer Dessous.Cu) (net 3) (tstamp 51BC9E93))
   (segment (start 54.61 34.29) (end 52.07 31.75) (width 0.5) (layer Dessous.Cu) (net 3) (tstamp 51BC9E92))
   (segment (start 48.26 31.75) (end 50.8 31.75) (width 0.5) (layer Dessous.Cu) (net 3))
-  (segment (start 58.42 29.21) (end 62.23 29.21) (width 0.5) (layer Dessous.Cu) (net 4) (status C00000))
+  (segment (start 58.42 29.21) (end 62.23 29.21) (width 0.5) (layer Dessous.Cu) (net 4))
 
   (zone (net 2) (net_name GND) (layer Dessous.Cu) (tstamp 51BC9F48) (hatch edge 0.508)
     (connect_pads (clearance 0.508))

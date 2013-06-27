@@ -1,7 +1,7 @@
 (export (version D)
   (design
-    (source C:\Users\marc\Documents\dev\Imprimante3D\pcb\optoSwitch\optoSwitch.sch)
-    (date "15.06.2013 18:52:30")
+    (source C:/Users/marc/Documents/dev/Imprimante3D/pcb/optoSwitch/optoSwitch.sch)
+    (date "27.06.2013 12:45:32")
     (tool "eeschema (2013-05-16 BZR 4016)-stable"))
   (components
     (comp (ref IC1)
@@ -16,7 +16,7 @@
       (sheetpath (names /) (tstamps /))
       (tstamp 51BC8DED))
     (comp (ref R2)
-      (value 2k2)
+      (value 4k7)
       (libsource (lib device) (part R))
       (sheetpath (names /) (tstamps /))
       (tstamp 51BC8DFC))
@@ -26,6 +26,17 @@
       (sheetpath (names /) (tstamps /))
       (tstamp 51BC8E35)))
   (libparts
+    (libpart (lib marcha) (part OptoSwitch)
+      (fields
+        (field (name Reference) IC)
+        (field (name Value) OptoSwitch)
+        (field (name Footprint) DIP4F)
+        (field (name Datasheet) ~))
+      (pins
+        (pin (num 1) (name ~) (type passive))
+        (pin (num 2) (name ~) (type passive))
+        (pin (num 3) (name ~) (type passive))
+        (pin (num 4) (name ~) (type passive))))
     (libpart (lib device) (part R)
       (description Resistance)
       (footprints
@@ -50,25 +61,14 @@
       (pins
         (pin (num 1) (name P1) (type passive))
         (pin (num 2) (name PM) (type passive))
-        (pin (num 3) (name P3) (type passive))))
-    (libpart (lib marcha) (part OptoSwitch)
-      (fields
-        (field (name Reference) IC)
-        (field (name Value) OptoSwitch)
-        (field (name Footprint) DIP4F)
-        (field (name Datasheet) ~))
-      (pins
-        (pin (num 1) (name ~) (type passive))
-        (pin (num 2) (name ~) (type passive))
-        (pin (num 3) (name ~) (type passive))
-        (pin (num 4) (name ~) (type passive)))))
+        (pin (num 3) (name P3) (type passive)))))
   (libraries
     (library (logical device)
       (uri "C:\\Program Files (x86)\\KiCad\\share\\library\\device.lib"))
-    (library (logical conn)
-      (uri "C:\\Program Files (x86)\\KiCad\\share\\library\\conn.lib"))
     (library (logical marcha)
-      (uri "C:\\Program Files (x86)\\KiCad\\share\\library\\marcha\\marcha.lib")))
+      (uri "C:\\Program Files (x86)\\KiCad\\share\\library\\marcha\\marcha.lib"))
+    (library (logical conn)
+      (uri "C:\\Program Files (x86)\\KiCad\\share\\library\\conn.lib")))
   (nets
     (net (code 1) (name +5V)
       (node (ref R2) (pin 1))
