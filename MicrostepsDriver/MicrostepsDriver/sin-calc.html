@@ -1,0 +1,26 @@
+<pre>
+<script type='text/javascript'>
+	var NB_SAMPLES = 128;
+	var MAX_ANGLE = 180;
+	var MAX_CURRENT = 1; // 1.8; // Max Amperage in coil
+	var RSENS = 0.47;	// R sens value
+	var AREF = 1.1; // Reference voltage for ADC
+	var MAX_VOLTAGE = MAX_CURRENT * RSENS;
+	var AMPLITUDE = MAX_VOLTAGE;
+	document.write("const unsigned char sinewave[] PROGMEM = {");
+	for(var i=0;i<NB_SAMPLES;i++) {
+		if(i%16==0) document.write('\n\t');
+		var a = i * MAX_ANGLE / NB_SAMPLES;
+		var r = a * Math.PI / 180;
+		var s = Math.sin(r) * AMPLITUDE;
+		var adc_value = s / AREF * 255;
+		//document.write(a + " = " + s + " : " + adc_value);		
+		//document.write('<br>');
+		var r = Math.round(adc_value);
+		if(r<10) document.write(' ');
+		document.write(r);
+		if(i!=NB_SAMPLES-1) document.write(', ');
+	}
+	document.write("\n};\n");
+</script>
+</pre>
