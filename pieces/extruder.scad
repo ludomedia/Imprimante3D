@@ -8,11 +8,11 @@ w = 52;
 h = mot;
 vd = 3.5 / 2 + t;
 d = 8;
-vp = mot / 2 - 5;
+vp = 31 / 2; //mot / 2 - 5;
 daxe = 18.5;
 daxepla = daxe-11-1.5;
 
-print = 0;
+print = 1;
 
 module vis(x, y) {
 	translate([x, y, 0]) cylinder(d, vd, vd, true);
@@ -50,10 +50,13 @@ module bas() {
 		difference() {
 			translate([(w-mot)/2,0,0]) { cube([w, h, d], true); }
 			translate([0, 0, -d/2]) {
-				cylinder(d, 3 + t, 3 + t);
+				cylinder(d, 3.5 + t, 3.5 + t);
 				cylinder(2 + t, 11 + t, 11 + t);
 				translate([daxe, 0, 0]) {
-					cylinder(5.5 + t, 13/2 + t, 13/2 + t, $fn = 6);
+					//cylinder(5.5 + t, 14.7/2 + t, 14.7/2 + t, $fn = 6);
+					for ( i = [0 : 60 : 120] ) {
+						rotate(i, [0,0,1]) cube([13, 8, 5.6], true);
+					}
 					cylinder(d, 4 + t, 4 + t);
 				}
 			}

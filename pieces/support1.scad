@@ -1,4 +1,5 @@
-//$fa = 0.01;
+$fa = 1;
+$fs = 1;
 mg = 0.7;
 
 module socle_roulement() {
@@ -12,7 +13,7 @@ module socle_roulement() {
 		}
 		translate([0, 3, 0]) cube([1, 3, 10]);		
 		translate([19, 3, 0]) cube([1, 3, 10]);		
-		translate([0, 24-3-3, 0]) cube([1, 3, 10]);		
+		translate([0, 28-3-3, 0]) cube([1, 3, 10]);		
 		translate([19, 28-3-3, 0]) cube([1, 3, 10]);		
 	}
 }
@@ -20,15 +21,17 @@ module socle_roulement() {
 module socle_barre() {
 	difference() {
 		translate([0, -6, 0]) {
-			cube([10, 12, 10]);
+			cube([20, 12, 10]);
 		}
 		translate([0, 0, 10]) {
 			rotate(90, [0, 1, 0]) {
-				cylinder(10, 4 + mg, 4 + mg);
+				cylinder(20, 4 + mg, 4 + mg);
 			}
 		}
 		translate([3, -6, 0]) cube([3, 1, 10]);		
 		translate([3, 6-1, 0]) cube([3, 1, 10]);		
+		translate([13, -6, 0]) cube([3, 1, 10]);		
+		translate([13, 6-1, 0]) cube([3, 1, 10]);		
 	}
 }
 
