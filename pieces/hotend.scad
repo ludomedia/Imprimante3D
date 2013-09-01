@@ -13,7 +13,7 @@ difference() {
 	}
 	translate([0, -2, 0]) {
 		translate([0, 0, 5])	cylinder(10, 2.5 + t, 3.5 + t);
-		cylinder(5, 8 + t, 8 + t);
+		cylinder(5.5, 8 + t, 8 + t);
 		translate([-2.5, -8, 0 ]) cube([5, 8 + t, 5]);
 		translate([0, 0, h - 25]) cylinder(25, 4 + t, 4 + t);
 	}
@@ -27,7 +27,7 @@ difference() {
 			cylinder(h, 2.5+t, 2.5+t);
 		}
 	}
-	translate([(w-5)/2, 0, 0]) {
+	translate([(w-5)/2, 2, 0]) {
 		translate([0, 0, 27.5 + (1.6+t) - 18 - 2]) {
 			rotate(90, [0, 1, 0]) cylinder(5, 1.6+t, 1.6+t, true);
 		}
@@ -36,7 +36,7 @@ difference() {
 		}
 	}
 
-	translate([-(w-5)/2, 0, 0]) {
+	translate([-(w-5)/2, 2, 0]) {
 		translate([0, 0, 28.5 + (1.6+t) - 18 - 2]) {
 			rotate(90, [0, 1, 0]) cylinder(5, 1.6+t, 1.6+t, true);
 		}
