@@ -21,14 +21,15 @@ fila_entre_axes = 4-0.5 + 3/2;
 mx_offset = 40;
 mx = mx_offset + entre_axes + fila_entre_axes + 11;
 my = 60;
-guide_ox = mx_offset + entre_axes + fila_entre_axes - 4 + 8;
+guide_ox = mx_offset + entre_axes + fila_entre_axes;
 motor_ox = mx_offset;
 
 //pression
 sx = 19;
 sy = 17;
 sz = 38 + 20;
-rz = 20;
+pz = 38;
+rz = 19;
 rr = 8 / 2 + t;
 axe_clip = 1;
 
@@ -37,7 +38,7 @@ ray = sx+1;
 raz = sy+1;
 rep = 5;
 
-fix_r1 = 2 + t;
+fix_r1 = 2.5 + t;
 fix_r2 = 4.5 + t;
 fix_s = 15;
 
@@ -62,10 +63,10 @@ module motor() {
 
 module guide() {
 		difference() {
-			translate([-ge/2, 0, -fila_h ]) cube([ge, gy, top - mz]);
+			translate([-ge/2, 0, -fila_h ]) % cube([ge, gy, top - mz]);
 			rotate(-90,[1,0,0]) {
-				translate([0, 0, gy-5]) cylinder(5, 4+t, fila_r);
-				cylinder(gy - 5, 4 + t, 4 + t);
+				translate([0, 0, gy-5]) # cylinder(5, 4+t, fila_r);
+				# cylinder(gy - 5, 4 + t, 4 + t);
 			}
 		}
 }
@@ -73,20 +74,29 @@ module guide() {
 module pression() {
 	color("Red") {
 		rotate(-90,[0,1,0]) {
-			difference() {
-				cube([sx, sy, sz], true);
-				translate([0, 0, (sz-10)/2]) cube([6, 20, 10], true);
-				translate([0, 0, sz/2 - axe_clip]) rotate(90, [0, 1, 0]) {
-					cylinder(sx-2, 4 + t, 4 + t, true);
+			rotate(90,[0,0,1]) {
+				difference() {
+					cube([sx, sy, pz], true);
+					rotate(90,[0,0,1]) {
+						translate([0, 0, (pz-11)/2]) cube([6, 20, 11], true);
+						translate([0, 0, pz/2 - axe_clip]) rotate(90, [0, 1, 0]) {
+							cylinder(sy-2, 4.1, 4.1, true);
+						}
+						translate([0, 0, -pz/2  + rz/2]) {
+						  cylinder(rz, rr, rr, true);
+						}
+					}
+					//translate([sx/2, 0, 0]) cube([sx,sy,sz], true);
 				}
-				translate([0, 0, -sz/2  + rz/2]) {
-					cylinder(rz, rr, rr, true);
-					translate([0, 0, rz/2]) sphere(rr, true);
-				}
-				//translate([sx/2, 0, 0]) cube([sx,sy,sz], true);
-			}
-	
+			}	
 		}
+	}
+}
+
+module fixressort() {
+	color("Orange") {
+		cube([5, sy, sx], true);
+		translate([-15/2,0,0]) rotate(90,[0,1,0]) cylinder(20, 2.5, 2.5, true);	
 	}
 }
 
@@ -96,7 +106,7 @@ module rail() {
 			translate([0,-rep,0]) cube([rax+2*rep, ray+2*rep, top]);
 			translate([0,0,top-raz-2*rep]) cube([rax, ray, raz]);
 			translate([rax,ray/2,mz+fila_h]) rotate(90,[0,1,0]) {
-				# translate([-5,-8/2,rep/2]) cube([14,8,4]);
+				translate([-5,-8/2,rep/2]) cube([14,8,4]);
 				cylinder(2*rep, 2+t, 2+t);
 			}
 		}
@@ -130,12 +140,13 @@ module piece() {
 				guide();
 				translate([0, my+20, 0]) rotate(180,[0,0,1]) guide();
 			}
-			translate([guide_ox + ge/2 + fix_s / 2, 0,top/2]) {
+			translate([guide_ox + ge/2 + fix_s / 2 + 4, 0,top/2]) {
 				translate([0, 20-rep -fix_s / 2, 0]) fixation();
 				translate([0, my-(20-rep -fix_s / 2), 0]) fixation();
 			}
 			translate([motor_ox + entre_axes - 10,my/2,0]) {
-				//translate([sz/2,0,mz+fila_h]) pression();
+				translate([pz/2 + 20,0,mz+fila_h]) ! pression();
+				translate([sz + 16,0,mz+fila_h]) fixressort();
 				rail();
 			}
 		}
@@ -148,7 +159,7 @@ module piece() {
 			translate([0,0,top-2*rep]) cylinder(5, 8+t/2, 8+t/2);
 		}
 		translate([20,-25,0]) rotate(45,[0,0,1]) cube([32,65,mz]);
-		translate([mx,my/2-7.5,3]) # cube([55,15,mz-3]);
+		translate([mx,my/2-7.5,3]) cube([55,15,mz-3]);
 		translate([73,-10,0]) cylinder(mz, 25, 25);
 		translate([73,my+10,0]) cylinder(mz, 25, 25);
 	}
@@ -160,10 +171,9 @@ translate([-mx/2,-my/2,0]) {
 	//	translate([70 ,my/2,5]) {
 	//		# cube([40, 20, 10], true);
 	//	}
-
-	difference() {
+	intersection() {
 		piece();
-		translate([mx+20 ,my/2,top/2 + mz - 0.01]) {
+		translate([mx+20 ,my/2,top/2 + mz + 0.01]) {
 		  cube([30 + rax+2*rep, my + 20.1, top], true);
 		}
 	}
