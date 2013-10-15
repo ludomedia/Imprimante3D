@@ -1,0 +1,90 @@
+<pre>
+<script type='text/javascript'>
+
+/*
+const short temptable_5[][2] PROGMEM = {
+// ATC Semitec 104GT-2 (Used in ParCan)
+// Verified by linagee. Source: http://shop.arcol.hu/static/datasheets/thermistors.pdf
+// Calculated using 4.7kohm pullup, voltage divider math, and manufacturer provided temp/resistance
+   {1*OVERSAMPLENR, 713},
+   {17*OVERSAMPLENR, 300}, //top rating 300C
+   {20*OVERSAMPLENR, 290},
+   {23*OVERSAMPLENR, 280},
+   {27*OVERSAMPLENR, 270},
+   {31*OVERSAMPLENR, 260},
+   {37*OVERSAMPLENR, 250},
+   {43*OVERSAMPLENR, 240},
+   {51*OVERSAMPLENR, 230},
+   {61*OVERSAMPLENR, 220},
+   {73*OVERSAMPLENR, 210},
+   {87*OVERSAMPLENR, 200},
+   {106*OVERSAMPLENR, 190},
+   {128*OVERSAMPLENR, 180},
+   {155*OVERSAMPLENR, 170},
+   {189*OVERSAMPLENR, 160},
+   {230*OVERSAMPLENR, 150},
+   {278*OVERSAMPLENR, 140},
+   {336*OVERSAMPLENR, 130},
+   {402*OVERSAMPLENR, 120},
+   {476*OVERSAMPLENR, 110},
+   {554*OVERSAMPLENR, 100},
+   {635*OVERSAMPLENR, 90},
+   {713*OVERSAMPLENR, 80},
+   {784*OVERSAMPLENR, 70},
+   {846*OVERSAMPLENR, 60},
+   {897*OVERSAMPLENR, 50},
+   {937*OVERSAMPLENR, 40},
+   {966*OVERSAMPLENR, 30},
+   {986*OVERSAMPLENR, 20},
+   {1000*OVERSAMPLENR, 10},
+   {1010*OVERSAMPLENR, 0}
+};
+*/
+	// Javascript adaptation of python code from: http://hydraraptor.blogspot.de/2007/10/measuring-temperature-easy-way.html
+	function Thermistor(r0, t0, beta, r1, r2, maxadc) {
+       this.r0 = r0                        // stated resistance, e.g. 10K
+       this.t0 = t0 + 273.15               // temperature at stated resistance, e.g. 25C
+       this.beta = beta                    // stated beta, e.g. 3500
+       this.vadc = 5                     // ADC reference
+       this.vcc = 5.0                      // supply voltage to potential divider
+       this.vs = r1 * this.vcc / (r1 + r2) // effective bias voltage
+       this.rs = r1 * r2 / (r1 + r2)       // effective bias impedance
+       this.k = r0 * Math.exp(-beta / self.t0)  // constant part of calculation
+	   this.maxadc = maxadc;
+	}
+
+	// Convert ADC reading into a temperature in Celcius
+	Thermistor.prototype.temp = function(adc) {
+       v = adc * this.vadc / this.maxadc          // convert the 10 bit ADC value to a voltage
+       r = this.rs * v / (this.vs - v)     // resistance of thermistor
+       return (this.beta / Math.log(r / this.k)) - 273.15        // temperature
+	}
+
+	// Convert a temperature in Celcius into a ADC value
+	Thermistor.prototype.setting = function(t) {      
+       r = this.r0 * Math.exp(this.beta * (1 / (t + 273.15) - 1 / this.t0)) // resistance of the thermistor
+       v = this.vs * r / (this.rs + r)     // the voltage at the potential divider
+       return Math.round(v / this.vadc * this.maxadc)  // the ADC reading
+	}
+
+	var NUMTEMPS = 20;
+	// Calcul de R1 et R2:
+	// Impédance idéale = R @ température centrale (max temp - min temp / 2)
+	// R1 = R / (1 - Vfsd / Vref)  Vfsd = 1.1V et Vref = 5V   ->   R1 = 2087 -> 2k2
+	// R2 = R * R1 / (R1- R)  ->  R2 = 1628 * 2087 / (2087 - 1628)  = 7402 -> 6k8
+	
+	var thm = new Thermistor(100000, 26, 3765, 10000000, 4700, 1023); // R@150 = 1628
+	//var thm = new Thermistor(10000, 25, 3964, 680, 1600, 1023);
+	var MIN_TEMP = 0;
+	var MAX_TEMP = 300;
+	var TEMP_INC = 10;
+	//document.write("const short temptable_" + table_id + "[][2] PROGMEM = {");
+	for(var temp=MAX_TEMP;temp>=MIN_TEMP;temp-=TEMP_INC) {
+		document.write('\n\t');
+		var v = thm.setting(temp);
+		document.write("{" + v + "*OVERSAMPLENR, " + temp + "}");
+		if(temp!=MIN_TEMP) document.write(",");
+	}
+	//document.write("\n};\n");
+</script>
+</pre>
