@@ -58,21 +58,21 @@ module adj() {
 	}
 }
 
-
+/*
 difference() {
 	fixe();
 	translate([0,0,(dz/2-3)]) rotate(90,[0,1,0]) trou(dx);
 	translate([0,0,-(dz/2-3)]) rotate(90,[0,1,0]) trou(dx);
 	translate([0,0,2]) rotate(90,[0,1,0]) trou(12);
 }
-
+*/
 
 ax = 5;
 ay = 25;
 az = 5;
 ep = 1;
 ar = 5;
-/*
+
 color("Blue") {
 	translate([dx+reso/2 + 0.25,0,0]) {
 		difference() {
@@ -93,4 +93,3 @@ color("Blue") {
 		}
 	}
 }
-*/
