@@ -117,8 +117,25 @@ module fixtube(b1, b2, tr) {
 	rotate(270, [0,1,0]) cylinder(b1, tr, tr);
 }
 
-translate([ax,ay,-20+mz]) meca();
-! translate([ax,-entre_axes_2+ay,fz]) pression(2);
+module printer_fix(ex) {
+	translate([0,9.9,0]) {
+		translate([-5,-11.5,sz-11]) rotate(45,[1,0,0]) cube([5,15,13]);
+		rotate(180, [0,0,1]) {
+			difference() {
+				cube([ex, 10, 45]);
+				translate([ex-7,-10,10]) {
+					rotate(-90,[1,0,0]) vis_noyee(5, 20);
+					translate([0,0,25]) rotate(-90,[1,0,0]) vis_noyee(5, 20);
+				}
+			}
+		}
+	}
+}
+
+
+//translate([ax,ay,-20+mz]) meca();
+//translate([ax,-entre_axes_2+ay,fz]) pression(2);
+translate([sx,sy,0]) printer_fix(19);
 
 difference() {
 	cube([sx,sy,sz]);
