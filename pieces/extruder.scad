@@ -152,7 +152,7 @@ difference() {
 	translate([ax,fy - 8,fz]) cylinder(8, 12, 12, true);
 	translate([10, fy, fz]) fixtube(11, 12, 3.3);
  	translate([ax,ay + entre_axes,mz/2]) rotate(90, [0,0,1]) nema17(mz, 4);
-	translate([sx-mx,52,sz/2]) # rotate(90,[0,1,0]) cylinder(mx,2,2);
+	translate([sx-mx,50,sz/2]) # rotate(90,[0,1,0]) cylinder(mx,2,2);
 	translate([0,43,0]) cube([41,sy-43,mz]);
 }
 
